@@ -13,9 +13,7 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(cors(corsOptions));
-}
+app.use(cors(corsOptions));
 
 app.use('/search', require('./api/routes/search-router'));
 
