@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 
 app.use('/search', require('./api/routes/search-router'));
+app.use('/game', require('./api/routes/game-router'));
 
 app.listen(port, (error) => {
   if (error) throw error;
