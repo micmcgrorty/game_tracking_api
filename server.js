@@ -9,6 +9,12 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', process.env.APP_ORIGIN);
+  });
+}
+
 app.use('/search', require('./api/routes/search-router'));
 
 app.listen(port, (error) => {
