@@ -10,7 +10,7 @@ router.get('/popular', async (req, res) => {
     process.env.IGDB_CLIENT_ID,
     process.env.IGDB_ACCESS_TOKEN
   )
-    .fields(['*', 'cover.*'])
+    .fields(['*', 'cover.*', 'platforms.*'])
     .limit('9')
     .sort('rating', 'desc')
     .where(
@@ -32,7 +32,7 @@ router.get('/new-releases', async (req, res) => {
     process.env.IGDB_CLIENT_ID,
     process.env.IGDB_ACCESS_TOKEN
   )
-    .fields(['*', 'cover.*'])
+    .fields(['*', 'cover.*', 'platforms.*'])
     .limit('9')
     .sort('first_release_date', 'desc')
     .where(
@@ -52,7 +52,7 @@ router.get('/:id', async (req, res) => {
     process.env.IGDB_CLIENT_ID,
     process.env.IGDB_ACCESS_TOKEN
   )
-    .fields(['*', 'cover.*'])
+    .fields(['*', 'cover.*', 'platforms.*'])
     .where(`id = ${id}`)
     .request('/games');
 
@@ -66,7 +66,7 @@ router.post('/', async (req, res) => {
     process.env.IGDB_CLIENT_ID,
     process.env.IGDB_ACCESS_TOKEN
   )
-    .fields(['*', 'cover.*'])
+    .fields(['*', 'cover.*', 'platforms.*'])
     .where(`id = (${gameIds.join(',')})`)
     .request('/games');
 

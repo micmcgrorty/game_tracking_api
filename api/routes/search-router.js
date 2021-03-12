@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
     process.env.IGDB_CLIENT_ID,
     process.env.IGDB_ACCESS_TOKEN
   )
-    .fields(['*', 'cover.*'])
+    .fields(['*', 'cover.*', 'platforms.*'])
     .limit(100)
     .where('category = 0')
     .search(searchTerm)
