@@ -5,6 +5,7 @@ const igdb = require('igdb-api-node').default;
 module.exports = router;
 
 router.get('/popular', async (req, res) => {
+  const date = new Date();
   const response = await igdb(
     process.env.IGDB_CLIENT_ID,
     process.env.IGDB_ACCESS_TOKEN
@@ -14,9 +15,10 @@ router.get('/popular', async (req, res) => {
     .sort('rating', 'desc')
     .where(
       `first_release_date != null &
-      first_release_date < ${new Date().getTime()} & 
+      first_release_date < ${new Date().getTime()} &
+      first_release_date > ${(date.getTime() / 1000).toFixed(0) - 31536000} &
       rating != null &
-      rating_count > 250 &
+      rating_count > 50 &
       category = 0`
     )
     .request('/games');
@@ -25,6 +27,7 @@ router.get('/popular', async (req, res) => {
 });
 
 router.get('/new-releases', async (req, res) => {
+  const date = new Date();
   const response = await igdb(
     process.env.IGDB_CLIENT_ID,
     process.env.IGDB_ACCESS_TOKEN
@@ -34,7 +37,7 @@ router.get('/new-releases', async (req, res) => {
     .sort('first_release_date', 'desc')
     .where(
       `first_release_date != null &
-      first_release_date < ${new Date().getTime()} &
+      first_release_date < ${(date.getTime() / 1000).toFixed(0)} &
       category = 0`
     )
     .request('/games');
