@@ -4,8 +4,8 @@ This is an api that communicates with the IGDB api in various different ways to 
 
 ## Structure
 
-Search router - contains one route for performing a search on the IGDB api
-Games router - contains four routes for interacting with the IGDB api: multiple games, single game, recent releases and popular games
+Search router - contains one route for performing a search on the IGDB api\
+Games router - contains four routes for interacting with the IGDB api: multiple games, single game, recent releases and popular games\
 
 ### Running locally
 
