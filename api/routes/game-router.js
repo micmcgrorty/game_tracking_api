@@ -19,6 +19,7 @@ router.get('/popular', async (req, res) => {
       first_release_date > ${(date.getTime() / 1000).toFixed(0) - 31536000} &
       rating != null &
       rating_count > 50 &
+      cover != null &
       category = 0`
     )
     .request('/games');
@@ -38,6 +39,7 @@ router.get('/new-releases', async (req, res) => {
     .where(
       `first_release_date != null &
       first_release_date < ${(date.getTime() / 1000).toFixed(0)} &
+      cover != null &
       category = 0`
     )
     .request('/games');
@@ -67,7 +69,7 @@ router.post('/', async (req, res) => {
     process.env.IGDB_ACCESS_TOKEN
   )
     .fields(['*', 'cover.*', 'platforms.*'])
-    .where(`id = (${gameIds.join(',')})`)
+    .where(`id = (${gameIds.join(',')}) & cover != null`)
     .request('/games');
 
   res.send(response.data);

@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   )
     .fields(['*', 'cover.*', 'platforms.*'])
     .limit(100)
-    .where('category = 0')
+    .where('category = 0 & cover != null')
     .search(searchTerm)
     .request('/games');
 
